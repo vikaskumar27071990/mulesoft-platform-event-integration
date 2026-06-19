@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="13cb8b56-51c8-40bf-9318-cac37bdf52b4" >
+		<salesforce:basic-connection username="auralwc2021build7realtime@gmail.com" password="Javajobjune2026" />
+	</salesforce:sfdc-config>
+	<salesforce:sfdc-config name="TargetConfig" doc:name="Salesforce Config" doc:id="2ec5d276-e479-463b-9c1f-d2addbd56459" >
+		<salesforce:basic-connection username="theprojectj27@gmail.com" password="Javajobjune2026" />
+	</salesforce:sfdc-config>
+	<flow name="platformeventdemoprojectFlow" doc:id="fcaf69d7-041f-4406-8f6f-3e8b289366f2" >
+		<salesforce:subscribe-channel-listener streamingChannel="/event/Source_Platform_Event__e" doc:name="Subscribe Source Platform Event" doc:id="2af63907-ac66-4371-8a95-a5370ed10f42" config-ref="Salesforce_Config"/>
+		<ee:transform doc:name="Transform Message" doc:id="0cc94885-520e-45f2-9650-e319160383c7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload.data.payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="fc9d2f57-3271-4913-b98c-e03ba6dab169" message="#[payload]"/>
+		<salesforce:publish-platform-event-message doc:name="Publish Target Platform Event" doc:id="56a49336-f455-4d80-84ec-e119d64d3e8f" config-ref="TargetConfig" platformEventName="Target_Platform_Event__e">
+			<salesforce:platform-event-messages ><![CDATA[#[[payload]]]]></salesforce:platform-event-messages>
+		</salesforce:publish-platform-event-message>
+	</flow>
+</mule>
