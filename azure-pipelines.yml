@@ -15,11 +15,8 @@ variables:
 steps:
 
 - script: |
-    echo "===== POM CHECK ====="
-    grep -n "cloudHub2Deployment" pom.xml || true
-    grep -n "connectedAppClientId" pom.xml || true
-    grep -n "businessGroupId" pom.xml || true
-  displayName: 'Verify POM Content'
+    sed -n '20,60p' pom.xml
+  displayName: 'Print Deployment Block'
 
 - task: Maven@3
   displayName: 'Build and Deploy to CloudHub 2.0'
