@@ -12,7 +12,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<app.runtime>4.9.0</app.runtime>
 		<mule.maven.plugin.version>4.9.0</mule.maven.plugin.version>
 	</properties>
@@ -24,63 +23,28 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
-<>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>mule-maven-plugin</artifactId>
-    <version>${mule.maven.plugin.version}</version>
-    <extensions>true</extensions>
-
-    <configuration>
-        <cloudHub2Deployment>
-
-            <uri>https://anypoint.mulesoft.com</uri>
-
-            <provider>MC</provider>
-
-            <environment>Sandbox</environment>
-
-            <target>Cloudhub-US-East-2</target>
-
-            <muleVersion>${app.runtime}</muleVersion>
-			 
-
-            <applicationName>platformeventdemo</applicationName>
-
-            <replicas>1</replicas>
-
-            <vCores>0.1</vCores>
-            <businessGroupId>${anypoint.orgId}</businessGroupId>
-            <connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
-
-            <connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
-
-            <connectedAppGrantType>client_credentials</connectedAppGrantType>
-
-        </cloudHub2Deployment>
-    </configuration>
-
-<plugin>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>mule-maven-plugin</artifactId>
-    <version>${mule.maven.plugin.version}</version>
-    <extensions>true</extensions>
-    <configuration>
-        <cloudHub2Deployment>
-            <uri>https://anypoint.mulesoft.com</uri>
-            <provider>MC</provider>
-            <environment>Sandbox</environment>
-            <target>Cloudhub-US-East-2</target>
-            <muleVersion>${app.runtime}</muleVersion>
-            <applicationName>platformeventdemo</applicationName>
-            <replicas>1</replicas>
-            <vCores>0.1</vCores>
-            <businessGroupId>${anypoint.orgId}</businessGroupId>
-            <connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
-            <connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
-            <connectedAppGrantType>client_credentials</connectedAppGrantType>
-        </cloudHub2Deployment>
-    </configuration>
-</plugin>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<cloudHub2Deployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<provider>MC</provider>
+						<environment>Sandbox</environment>
+						<target>Cloudhub-US-East-2</target>
+						<muleVersion>${app.runtime}</muleVersion>
+						<applicationName>platformeventdemo</applicationName>
+						<replicas>1</replicas>
+						<vCores>0.1</vCores>
+						<businessGroupId>${anypoint.orgId}</businessGroupId>
+						<connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
+						<connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
+						<connectedAppGrantType>client_credentials</connectedAppGrantType>
+					</cloudHub2Deployment>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
