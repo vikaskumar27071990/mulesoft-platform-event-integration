@@ -15,11 +15,11 @@ variables:
 steps:
 
 - script: |
-    echo "====== FULL POM.XML ======"
-    cat /home/vsts/work/1/s/pom.xml
-    echo "====== cloudHub2 CHECK ======"
-    grep -n "cloudHub2" /home/vsts/work/1/s/pom.xml || echo "❌ cloudHub2Deployment NOT FOUND in pom.xml"
-  displayName: 'Print pom.xml'
+    echo "===== POM CHECK ====="
+    grep -n "cloudHub2Deployment" pom.xml || true
+    grep -n "connectedAppClientId" pom.xml || true
+    grep -n "businessGroupId" pom.xml || true
+  displayName: 'Verify POM Content'
 
 - task: Maven@3
   displayName: 'Build and Deploy to CloudHub 2.0'
