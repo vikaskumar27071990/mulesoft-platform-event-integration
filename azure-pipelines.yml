@@ -11,6 +11,12 @@ pool:
 
 steps:
 
+# ✅ PEHLE YEH ADD KARO — dekho repo mein kya hai
+- script: |
+    echo "=== pom.xml content ==="
+    cat pom.xml | grep -A 30 "cloudHub2"
+  displayName: 'Print pom.xml CloudHub config'
+
 - task: Maven@3
   displayName: 'Build and Deploy to CloudHub 2.0'
   inputs:
@@ -22,11 +28,3 @@ steps:
       -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
       -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)
       -Danypoint.orgId=$(ANYPOINT_ORG_ID)
-
-- script: |
-    if [ -z "$(ANYPOINT_CLIENT_ID)" ]; then
-      echo "❌ CLIENT_ID is EMPTY - Variable set nahi hai!"
-    else
-      echo "✅ CLIENT_ID is present"
-    fi
-  displayName: 'Verify Variables'
