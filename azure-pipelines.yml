@@ -9,13 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - group: MuleSoft-CD
+
 steps:
 
-# ✅ PEHLE YEH ADD KARO — dekho repo mein kya hai
 - script: |
-    echo "=== pom.xml content ==="
-    cat pom.xml | grep -A 30 "cloudHub2"
-  displayName: 'Print pom.xml CloudHub config'
+    echo "====== FULL POM.XML ======"
+    cat /home/vsts/work/1/s/pom.xml
+    echo "====== cloudHub2 CHECK ======"
+    grep -n "cloudHub2" /home/vsts/work/1/s/pom.xml || echo "❌ cloudHub2Deployment NOT FOUND in pom.xml"
+  displayName: 'Print pom.xml'
 
 - task: Maven@3
   displayName: 'Build and Deploy to CloudHub 2.0'
