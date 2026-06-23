@@ -24,30 +24,14 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
 			</plugin>
-			<!--<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-			</plugin>-->
-			<plugin>
+<plugin>
     <groupId>org.mule.tools.maven</groupId>
     <artifactId>mule-maven-plugin</artifactId>
     <version>${mule.maven.plugin.version}</version>
     <extensions>true</extensions>
 
-	<executions>
-        <execution>
-            <id>deploy</id>
-            <phase>deploy</phase>
-            <goals>
-                <goal>deploy</goal>
-            </goals>
-        </execution>
-    </executions>
-
     <configuration>
-        <cloudHub2Deployment>
+        <cloudhub2Deployment>
 
             <uri>https://anypoint.mulesoft.com</uri>
 
@@ -57,7 +41,8 @@
 
             <target>Cloudhub-US-East-1</target>
 
-            <muleVersion>4.12.0</muleVersion>
+            <muleVersion>${app.runtime}</muleVersion>
+			 
 
             <applicationName>platformeventdemo</applicationName>
 
@@ -71,7 +56,7 @@
 
             <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-        </cloudHub2Deployment>
+        </cloudhub2Deployment>
     </configuration>
 
 </plugin>
