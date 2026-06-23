@@ -15,8 +15,8 @@ variables:
 steps:
 
 - script: |
-    sed -n '20,60p' pom.xml
-  displayName: 'Print Deployment Block'
+    cat pom.xml
+  displayName: 'Print Full POM'
 
 - task: Maven@3
   displayName: 'Build and Deploy to CloudHub 2.0'
