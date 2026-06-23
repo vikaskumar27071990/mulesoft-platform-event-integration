@@ -15,8 +15,9 @@ variables:
 steps:
 
 - script: |
-    cat pom.xml
-  displayName: 'Print Full POM'
+    mvn help:effective-pom -Doutput=effective-pom.xml
+    cat effective-pom.xml
+  displayName: 'Print Effective POM'
 
 - task: Maven@3
   displayName: 'Build and Deploy to CloudHub 2.0'
