@@ -36,6 +36,16 @@
     <version>${mule.maven.plugin.version}</version>
     <extensions>true</extensions>
 
+	<executions>
+        <execution>
+            <id>deploy</id>
+            <phase>deploy</phase>
+            <goals>
+                <goal>deploy</goal>
+            </goals>
+        </execution>
+    </executions>
+
     <configuration>
         <cloudHub2Deployment>
 
