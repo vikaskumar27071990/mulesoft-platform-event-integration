@@ -31,7 +31,7 @@
     <extensions>true</extensions>
 
     <configuration>
-        <cloudhub2Deployment>
+        <cloudHub2Deployment>
 
             <uri>https://anypoint.mulesoft.com</uri>
 
@@ -39,7 +39,7 @@
 
             <environment>Sandbox</environment>
 
-            <target>Cloudhub-US-East-1</target>
+            <target>Cloudhub-US-East-2</target>
 
             <muleVersion>${app.runtime}</muleVersion>
 			 
@@ -56,7 +56,7 @@
 
             <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-        </cloudhub2Deployment>
+        </cloudHub2Deployment>
     </configuration>
 
 </plugin>
