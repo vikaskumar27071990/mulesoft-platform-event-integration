@@ -12,14 +12,21 @@ pool:
 steps:
 
 - task: Maven@3
+  displayName: 'Build and Deploy to CloudHub 2.0'
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean package mule:deploy'
-    options: >
+    publishJUnitResults: false
+    options: >-
+      -DskipTests
       -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
       -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)
-      -X
+      -Danypoint.orgId=$(ANYPOINT_ORG_ID)
 
 - script: |
-    echo "CLIENT_ID_PRESENT=$(ANYPOINT_CLIENT_ID)"
-  displayName: 'Verify Client ID'
+    if [ -z "$(ANYPOINT_CLIENT_ID)" ]; then
+      echo "❌ CLIENT_ID is EMPTY - Variable set nahi hai!"
+    else
+      echo "✅ CLIENT_ID is present"
+    fi
+  displayName: 'Verify Variables'

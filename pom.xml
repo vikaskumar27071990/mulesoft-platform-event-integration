@@ -49,7 +49,7 @@
             <replicas>1</replicas>
 
             <vCores>0.1</vCores>
-
+            <businessGroupId>${anypoint.orgId}</businessGroupId>
             <connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
 
             <connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
