@@ -20,7 +20,7 @@ steps:
     #publishJUnitResults: true
     #testResultsFiles: '**/surefire-reports/TEST-*.xml'
     #goals: 'package'
-    goals: 'clean package'
+    goals: 'clean package mule:deploy'
     options: >
       -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
       -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)
