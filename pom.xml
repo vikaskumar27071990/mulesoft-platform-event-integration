@@ -26,18 +26,25 @@
 			<plugin>
     <groupId>org.mule.tools.maven</groupId>
     <artifactId>mule-maven-plugin</artifactId>
-    <version>4.9.0</version>
+    <version>${mule.maven.plugin.version}</version>
     <extensions>true</extensions>
     <configuration>
         <cloudHub2Deployment>
     <uri>https://anypoint.mulesoft.com</uri>
     <provider>MC</provider>
+
     <environment>Sandbox</environment>
+    <target>Cloudhub-US-East-2</target>
+
     <businessGroupId>${anypoint.orgId}</businessGroupId>
+
     <applicationName>platformeventdemoproject</applicationName>
-    <muleVersion>4.9.0</muleVersion>  <!-- 4.8.0 → 4.9.0 fix kiya -->
+
+    <muleVersion>${app.runtime}</muleVersion>
+
     <replicas>1</replicas>
     <vCores>0.1</vCores>
+
     <connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
     <connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
     <connectedAppGrantType>client_credentials</connectedAppGrantType>
