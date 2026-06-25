@@ -71,14 +71,14 @@
                     </cloudhub2Deployment>
                 </configuration>
                 <executions>
-                    <execution>
-                        <id>deploy-to-cloudhub2</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
+    <execution>
+        <id>default-deploy</id>
+        <phase>deploy</phase>
+        <goals>
+            <goal>deploy</goal>
+        </goals>
+    </execution>
+</executions>
             </plugin>
         </plugins>
     </build>
