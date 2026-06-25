@@ -23,7 +23,7 @@ steps:
   displayName: 'Build and Deploy to CloudHub 2.0'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean deploy'
+    goals: 'clean verify'
     publishJUnitResults: false
     options: >-
       -DskipTests
