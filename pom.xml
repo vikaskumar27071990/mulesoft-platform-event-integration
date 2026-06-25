@@ -14,6 +14,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<app.runtime>4.9.0</app.runtime>
 		<mule.maven.plugin.version>4.9.0</mule.maven.plugin.version>
+
+		<!-- Defensive defaults: these get OVERRIDDEN when you pass -Danypoint.clientId=...
+		     on the CLI. If you don't pass them, build will fail loudly here instead of
+		     failing later inside the plugin with a confusing error. -->
+		<anypoint.clientId>UNSET</anypoint.clientId>
+		<anypoint.clientSecret>UNSET</anypoint.clientSecret>
+		<anypoint.orgId>UNSET</anypoint.orgId>
 	</properties>
 
 	<build>
@@ -24,33 +31,33 @@
 				<version>3.2.0</version>
 			</plugin>
 			<plugin>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>mule-maven-plugin</artifactId>
-    <version>${mule.maven.plugin.version}</version>
-    <extensions>true</extensions>
-    <configuration>
-        <cloudHub2Deployment>
-    <uri>https://anypoint.mulesoft.com</uri>
-    <provider>MC</provider>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<cloudHub2Deployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<provider>MC</provider>
 
-    <environment>Sandbox</environment>
-    <target>Cloudhub-US-East-2</target>
+						<environment>Sandbox</environment>
+						<target>Cloudhub-US-East-2</target>
 
-    <businessGroupId>${anypoint.orgId}</businessGroupId>
+						<businessGroupId>${anypoint.orgId}</businessGroupId>
 
-    <applicationName>platformeventdemoproject</applicationName>
+						<applicationName>platformeventdemoproject</applicationName>
 
-    <muleVersion>${app.runtime}</muleVersion>
+						<muleVersion>${app.runtime}</muleVersion>
 
-    <replicas>1</replicas>
-    <vCores>0.1</vCores>
+						<replicas>1</replicas>
+						<vCores>0.1</vCores>
 
-    <connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
-    <connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
-    <connectedAppGrantType>client_credentials</connectedAppGrantType>
-</cloudHub2Deployment>
-    </configuration>
-</plugin>
+						<connectedAppClientId>${anypoint.clientId}</connectedAppClientId>
+						<connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
+						<connectedAppGrantType>client_credentials</connectedAppGrantType>
+					</cloudHub2Deployment>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
