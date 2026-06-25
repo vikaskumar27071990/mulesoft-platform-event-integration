@@ -21,6 +21,7 @@ steps:
     goals: 'clean deploy -DmuleDeploy'
     publishJUnitResults: false
     options: >-
+      -X
       -DskipTests
       -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
       -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)
