@@ -11,22 +11,22 @@ steps:
 
 - script: |
     mkdir -p $HOME/.m2
-    cat > $HOME/.m2/settings.xml << EOF
-    <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0">
-      <servers>
-        <server>
-          <id>anypoint-exchange-v3</id>
-          <username>~~~Client~~~</username>
-          <password>${ANYPOINT_CLIENT_ID}~?~${ANYPOINT_CLIENT_SECRET}</password>
-        </server>
-        <server>
-          <id>mulesoft-releases</id>
-          <username>~~~Client~~~</username>
-          <password>${ANYPOINT_CLIENT_ID}~?~${ANYPOINT_CLIENT_SECRET}</password>
-        </server>
-      </servers>
-    </settings>
-    EOF
+    echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0">' > $HOME/.m2/settings.xml
+    echo '  <servers>' >> $HOME/.m2/settings.xml
+    echo '    <server>' >> $HOME/.m2/settings.xml
+    echo '      <id>anypoint-exchange-v3</id>' >> $HOME/.m2/settings.xml
+    echo '      <username>~~~Client~~~</username>' >> $HOME/.m2/settings.xml
+    echo "      <password>${ANYPOINT_CLIENT_ID}~?~${ANYPOINT_CLIENT_SECRET}</password>" >> $HOME/.m2/settings.xml
+    echo '    </server>' >> $HOME/.m2/settings.xml
+    echo '    <server>' >> $HOME/.m2/settings.xml
+    echo '      <id>mulesoft-releases</id>' >> $HOME/.m2/settings.xml
+    echo '      <username>~~~Client~~~</username>' >> $HOME/.m2/settings.xml
+    echo "      <password>${ANYPOINT_CLIENT_ID}~?~${ANYPOINT_CLIENT_SECRET}</password>" >> $HOME/.m2/settings.xml
+    echo '    </server>' >> $HOME/.m2/settings.xml
+    echo '  </servers>' >> $HOME/.m2/settings.xml
+    echo '</settings>' >> $HOME/.m2/settings.xml
+    echo "=== settings.xml content ==="
+    cat $HOME/.m2/settings.xml
   displayName: 'Generate Maven settings.xml for Exchange auth'
   env:
     ANYPOINT_CLIENT_ID: $(ANYPOINT_CLIENT_ID)
