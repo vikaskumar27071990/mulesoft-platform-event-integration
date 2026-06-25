@@ -36,11 +36,10 @@
 
         <!-- ✅ replayId explicit set kiya -->
         <salesforce:subscribe-channel-listener 
-            streamingChannel="/event/Source_Platform_Event__e"
-            replayId="-1"
-            doc:name="Subscribe Source Platform Event" 
-            doc:id="2af63907-ac66-4371-8a95-a5370ed10f42" 
-            config-ref="Salesforce_Config"/>
+    streamingChannel="/event/Source_Platform_Event__e"
+    doc:name="Subscribe Source Platform Event" 
+    doc:id="2af63907-ac66-4371-8a95-a5370ed10f42" 
+    config-ref="Salesforce_Config"/>
 
         <ee:transform doc:name="Transform Message" 
                       doc:id="0cc94885-520e-45f2-9650-e319160383c7">
