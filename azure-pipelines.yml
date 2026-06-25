@@ -14,11 +14,11 @@ steps:
     cat effective-pom.xml
   displayName: 'Print Effective POM'
 
-- task: Maven@4                                        # ✅ Maven@3 → @4 (deprecation fix)
+- task: Maven@4
   displayName: 'Build and Deploy to CloudHub 2.0'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean deploy -DmuleDeploy'                 # ✅ KEY FIX — yeh line thi gaayab!
+    goals: 'clean deploy -DmuleDeploy'
     publishJUnitResults: false
     options: >-
       -DskipTests
