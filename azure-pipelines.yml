@@ -10,6 +10,24 @@ variables:
 steps:
 
 - script: |
+    mkdir -p $HOME/.m2
+    cat > $HOME/.m2/settings.xml << EOF
+    <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0">
+      <servers>
+        <server>
+          <id>anypoint-exchange-v3</id>
+          <username>${ANYPOINT_CLIENT_ID}</username>
+          <password>${ANYPOINT_CLIENT_SECRET}</password>
+        </server>
+      </servers>
+    </settings>
+    EOF
+  displayName: 'Generate Maven settings.xml for Exchange auth'
+  env:
+    ANYPOINT_CLIENT_ID: $(ANYPOINT_CLIENT_ID)
+    ANYPOINT_CLIENT_SECRET: $(ANYPOINT_CLIENT_SECRET)
+
+- script: |
     mvn help:effective-pom -Doutput=effective-pom.xml
     cat effective-pom.xml
   displayName: 'Print Effective POM'
@@ -21,7 +39,6 @@ steps:
     goals: 'clean deploy -DmuleDeploy'
     publishJUnitResults: false
     options: >-
-      -X
       -DskipTests
       -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
       -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)

@@ -5,7 +5,7 @@
          https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mycompany</groupId>
+    <groupId>7db4c620-0a8e-4023-afed-8988c04226fb</groupId>
     <artifactId>platformeventdemoproject</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
@@ -58,6 +58,10 @@
                         <connectedAppClientSecret>${anypoint.clientSecret}</connectedAppClientSecret>
                         <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
+                        <!-- ✅ Tells the plugin which distributionManagement/server entry to use 
+                             when publishing to, and fetching from, Exchange -->
+                        <server>anypoint-exchange-v3</server>
+
                         <!-- ✅ CRITICAL FIX — Pass SF creds as runtime properties -->
                         <properties>
                             <sf.consumerKey>${sf.consumerKey}</sf.consumerKey>
@@ -97,19 +101,25 @@
     </dependencies>
 
     <repositories>
-        <repository>
-            <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>mulesoft-releases</id>
-            <name>MuleSoft Releases Repository</name>
-            <url>https://repository.mulesoft.org/releases/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
+    <repository>
+        <id>anypoint-exchange-v3</id>
+        <name>Anypoint Exchange</name>
+        <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/7db4c620-0a8e-4023-afed-8988c04226fb/maven</url>
+        <layout>default</layout>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+    </repository>
+    <repository>
+        <id>mulesoft-releases</id>
+        <name>MuleSoft Releases Repository</name>
+        <url>https://repository.mulesoft.org/releases/</url>
+        <layout>default</layout>
+    </repository>
+</repositories>
 
     <pluginRepositories>
         <pluginRepository>
@@ -122,5 +132,18 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <!-- ✅ NEW — THE ACTUAL FIX FOR THE 404 EXCHANGE ERROR
+         This tells Maven WHERE to publish the built artifact on `mvn deploy`.
+         Without this, the artifact never lands in Exchange, so CloudHub 2.0
+         later fails with: "404 There is no asset matching given parameters." -->
+    <distributionManagement>
+        <repository>
+            <id>anypoint-exchange-v3</id>
+            <name>Exchange Private Repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${anypoint.orgId}/maven</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 
 </project>
