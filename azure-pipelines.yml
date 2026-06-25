@@ -16,8 +16,8 @@ steps:
       <servers>
         <server>
           <id>anypoint-exchange-v3</id>
-          <username>${ANYPOINT_CLIENT_ID}</username>
-          <password>${ANYPOINT_CLIENT_SECRET}</password>
+          <username>~~~Client~~~</username>
+          <password>$(ANYPOINT_CLIENT_ID)~?~$(ANYPOINT_CLIENT_SECRET)</password>
         </server>
       </servers>
     </settings>
@@ -27,16 +27,23 @@ steps:
     ANYPOINT_CLIENT_ID: $(ANYPOINT_CLIENT_ID)
     ANYPOINT_CLIENT_SECRET: $(ANYPOINT_CLIENT_SECRET)
 
-- script: |
-    mvn help:effective-pom -Doutput=effective-pom.xml
-    cat effective-pom.xml
-  displayName: 'Print Effective POM'
-
 - task: Maven@4
-  displayName: 'Build and Deploy to CloudHub 2.0'
+  displayName: 'Step 1 - Publish to Exchange'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean deploy -DmuleDeploy'
+    goals: 'clean deploy'
+    publishJUnitResults: false
+    options: >-
+      -DskipTests
+      -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
+      -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)
+      -Danypoint.orgId=$(ANYPOINT_ORG_ID)
+
+- task: Maven@4
+  displayName: 'Step 2 - Deploy to CloudHub 2.0'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'deploy -DmuleDeploy'
     publishJUnitResults: false
     options: >-
       -DskipTests
