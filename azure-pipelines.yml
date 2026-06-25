@@ -1,8 +1,3 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - main
 
@@ -19,14 +14,20 @@ steps:
     cat effective-pom.xml
   displayName: 'Print Effective POM'
 
-- task: Maven@3
+- task: Maven@4                                        # ✅ Maven@3 → @4 (deprecation fix)
   displayName: 'Build and Deploy to CloudHub 2.0'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean verify'
+    goals: 'clean deploy -DmuleDeploy'                 # ✅ KEY FIX — yeh line thi gaayab!
     publishJUnitResults: false
     options: >-
       -DskipTests
       -Danypoint.clientId=$(ANYPOINT_CLIENT_ID)
       -Danypoint.clientSecret=$(ANYPOINT_CLIENT_SECRET)
       -Danypoint.orgId=$(ANYPOINT_ORG_ID)
+      -Dsf.consumerKey=$(SF_CONSUMER_KEY)
+      -Dsf.consumerSecret=$(SF_CONSUMER_SECRET)
+      -Dsf.username=$(SF_USERNAME)
+      -Dsf.password=$(SF_PASSWORD)
+      -Dsf.target.username=$(SF_TARGET_USERNAME)
+      -Dsf.target.password=$(SF_TARGET_PASSWORD)
