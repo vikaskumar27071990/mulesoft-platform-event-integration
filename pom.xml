@@ -6,10 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mycompany</groupId>
-    <artifactId>platformeventdemoproject</artifactId>
+    <artifactId>platformeventdemo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
-    <name>platformeventdemoproject</name>
+    <name>platformeventdemo</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
                         <businessGroupId>${anypoint.orgId}</businessGroupId>
 
                         <!-- ✅ Match this with Anypoint or let pipeline create fresh -->
-                        <applicationName>platformeventdemoproject</applicationName>
+                        <applicationName>platformeventdemo</applicationName>
 
                         <muleVersion>${app.runtime}</muleVersion>
                         <replicas>1</replicas>
