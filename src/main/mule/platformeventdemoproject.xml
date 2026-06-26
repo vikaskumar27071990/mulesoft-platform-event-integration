@@ -15,11 +15,7 @@
     <salesforce:sfdc-config name="Salesforce_Config" 
         doc:name="Salesforce Config" 
         doc:id="13cb8b56-51c8-40bf-9318-cac37bdf52b4">
-        <salesforce:oauth-user-pass-connection
-            consumerKey="${sf.consumerKey}"
-            consumerSecret="${sf.consumerSecret}"
-            username="${sf.username}" 
-            password="${sf.password}" />
+		<salesforce:basic-connection username="auralwc2021build7realtime@gmail.com" password="Javajobjune2026" />
     </salesforce:sfdc-config>
 
     <!-- Target Salesforce Config (Basic Auth) -->
@@ -27,14 +23,14 @@
         doc:name="Salesforce Config" 
         doc:id="2ec5d276-e479-463b-9c1f-d2addbd56459">
         <salesforce:basic-connection 
-            username="${sf.target.username}" 
-            password="${sf.target.password}" />
+            username="theprojectj27@gmail.com" 
+            password="Javajobjune2026" />
     </salesforce:sfdc-config>
 
     <flow name="platformeventdemoprojectFlow" 
           doc:id="fcaf69d7-041f-4406-8f6f-3e8b289366f2">
 
-        <!-- ✅ replayId explicit set kiya -->
+        <!-- ✅ replayId explicit set -->
         <salesforce:subscribe-channel-listener 
     streamingChannel="/event/Source_Platform_Event__e"
     doc:name="Subscribe Source Platform Event" 

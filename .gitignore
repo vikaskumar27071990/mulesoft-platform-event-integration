@@ -3,3 +3,4 @@ debug.log
 debug2.log
 debug3.log
 *.log
+/target/
