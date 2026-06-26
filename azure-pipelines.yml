@@ -41,12 +41,16 @@ steps:
     ANYPOINT_CLIENT_SECRET: $(ANYPOINT_CLIENT_SECRET)
 
 - script: |
-    echo "=== Testing Exchange auth ==="
+    echo "=== Testing MuleSoft public Exchange ==="
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+      "https://maven.anypoint.mulesoft.com/api/v3/maven/com/mulesoft/connectors/mule-salesforce-connector/10.22.5/mule-salesforce-connector-10.22.5.pom")
+    echo "HTTP STATUS (no auth): $HTTP_STATUS"
+
+    HTTP_STATUS2=$(curl -s -o /dev/null -w "%{http_code}" \
       -u "~~~Client~~~:${ANYPOINT_CLIENT_ID}~?~${ANYPOINT_CLIENT_SECRET}" \
-      "https://maven.anypoint.mulesoft.com/api/v3/organizations/7db4c620-0a8e-4023-afed-8988c04226fb/maven/com/mulesoft/connectors/mule-salesforce-connector/10.22.5/mule-salesforce-connector-10.22.5.pom")
-    echo "HTTP STATUS: $HTTP_STATUS"
-  displayName: 'Debug - Test Exchange auth'
+      "https://maven.anypoint.mulesoft.com/api/v3/maven/com/mulesoft/connectors/mule-salesforce-connector/10.22.5/mule-salesforce-connector-10.22.5.pom")
+    echo "HTTP STATUS (with auth): $HTTP_STATUS2"
+  displayName: 'Debug - Test public Exchange'
   env:
     ANYPOINT_CLIENT_ID: $(ANYPOINT_CLIENT_ID)
     ANYPOINT_CLIENT_SECRET: $(ANYPOINT_CLIENT_SECRET)
