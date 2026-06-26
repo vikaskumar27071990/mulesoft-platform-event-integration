@@ -9,6 +9,15 @@ variables:
 
 steps:
 
+- task: Cache@2
+  displayName: 'Cache Maven local repo'
+  inputs:
+    key: 'maven | "$(Agent.OS)" | **/pom.xml'
+    restoreKeys: |
+      maven | "$(Agent.OS)"
+      maven
+    path: $(HOME)/.m2/repository
+
 - script: |
     mkdir -p $HOME/.m2
     echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0">' > $HOME/.m2/settings.xml
@@ -25,9 +34,19 @@ steps:
     echo '    </server>' >> $HOME/.m2/settings.xml
     echo '  </servers>' >> $HOME/.m2/settings.xml
     echo '</settings>' >> $HOME/.m2/settings.xml
-    echo "=== settings.xml content ==="
     cat $HOME/.m2/settings.xml
-  displayName: 'Generate Maven settings.xml for Exchange auth'
+  displayName: 'Generate Maven settings.xml'
+  env:
+    ANYPOINT_CLIENT_ID: $(ANYPOINT_CLIENT_ID)
+    ANYPOINT_CLIENT_SECRET: $(ANYPOINT_CLIENT_SECRET)
+
+- script: |
+    echo "=== Testing Exchange auth ==="
+    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+      -u "~~~Client~~~:${ANYPOINT_CLIENT_ID}~?~${ANYPOINT_CLIENT_SECRET}" \
+      "https://maven.anypoint.mulesoft.com/api/v3/organizations/7db4c620-0a8e-4023-afed-8988c04226fb/maven/com/mulesoft/connectors/mule-salesforce-connector/10.22.5/mule-salesforce-connector-10.22.5.pom")
+    echo "HTTP STATUS: $HTTP_STATUS"
+  displayName: 'Debug - Test Exchange auth'
   env:
     ANYPOINT_CLIENT_ID: $(ANYPOINT_CLIENT_ID)
     ANYPOINT_CLIENT_SECRET: $(ANYPOINT_CLIENT_SECRET)
